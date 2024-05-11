@@ -10,12 +10,9 @@ class NumDivisors
         {
             if(num%i == 0)
             {
-                if(!div.contains(i))
-                    {
-                        div.add(i);
-                        if(!div.contains(num/i))
-                            div.add(num/i);
-                    }
+               div.add(i);
+               if(num/i !=i)
+                div.add(num/i);
             }
         }
 
