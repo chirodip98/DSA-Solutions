@@ -26,7 +26,7 @@ class AddTwoNumbers {
         
             if(f)
             {
-                carry = s / 10;
+                carry = s / 10;  // if sum is 21 I want to extract 2, hence /10
                 ListNode node = new ListNode(s%10);
                 curr.next = node;
                 curr=curr.next;
