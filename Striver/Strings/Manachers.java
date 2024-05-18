@@ -1,7 +1,7 @@
 public class Manachers
 {
 	//https://leetcode.com/problems/longest-palindromic-substring/description/
-	
+
 	public static void manacherAlgo(String S)
 	{
 		String T = "";
@@ -21,7 +21,7 @@ public class Manachers
 			while(i-P[i]>=0 && i+P[i]<T.length() && T.charAt(i-P[i])==T.charAt(i+P[i])){ P[i]++; }
 			if(i+P[i]>=r)
 			{
-				l=i-P[i];
+				l=i-P[i]; //Updating our bounding box
 				r=i+P[i];
 			}
 
