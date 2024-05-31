@@ -1,5 +1,13 @@
 public class LC1028
 {
+	/*
+
+	The sliding window pattern is applicable when the problem 
+	involves achieving a goal using subarrays or substrings, 
+	and individual elements cannot be independently selected
+
+
+	*/
 	//LC Solution O(N) S(1)
 	public int equalSubstring_lc(String s, String t, int maxCost) {
         int N = s.length();
