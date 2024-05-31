@@ -14,10 +14,10 @@ eg : 4 : 1 0 0
 
 if we carefully observe the x^y , there is a set bit on 2nd position (position is irrelevant)
 which means either x has 1 on that bit position and y has 0 or vice versa
-if we can create a  mask out of it which will segregate all the nums in array which has set pos on that
+if we can create a  mask out of it which will segregate all the nums in array which has set bit on that
 index in one group and nums which dont have into other
 
-mask = 0 1 0 : 2
+mask = 0 1 0 : 2 (mask should be selected in such way that it should report the first set bit in the xor)
 
 i.e group 1 : has set bit
 	3-0011
@@ -25,7 +25,7 @@ i.e group 1 : has set bit
 	6- 0110
 	7- 0111
 	7- 0111
-		 -
+	    -
 
 	group 2
 	5-0101
@@ -33,7 +33,7 @@ i.e group 1 : has set bit
 	4-0100
 	8-1000
 	8-1000
-		-
+	   -
 
 if we xor all elements in a group we will filter the single element : As a ^ a ^ b = b
 TC: O(n)
@@ -55,7 +55,7 @@ public class SingleDigitIII
 	 	int last_bit = 1;
 
 	 	while((last_bit & xor_orig)==0) 
-	 		last_bit = last_bit << 1;             //finding the mask which gives the first set bit from L -> R in xor_orig
+	 		last_bit = last_bit << 1;  //finding the mask which gives the first set bit from L -> R in xor_orig
 
 	 	int result[] = new int[2];
 	 	
