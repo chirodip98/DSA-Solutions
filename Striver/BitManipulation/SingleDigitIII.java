@@ -25,7 +25,7 @@ i.e group 1 : has set bit
 	6- 0110
 	7- 0111
 	7- 0111
-	    -
+	     -
 
 	group 2
 	5-0101
@@ -33,7 +33,7 @@ i.e group 1 : has set bit
 	4-0100
 	8-1000
 	8-1000
-	   -
+	    -
 
 if we xor all elements in a group we will filter the single element : As a ^ a ^ b = b
 TC: O(n)
