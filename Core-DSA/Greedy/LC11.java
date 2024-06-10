@@ -7,6 +7,8 @@ thus we will take l=0, r=arr.length-1;
 How to move the pointers?
 we will move the pointer which points to the minimum height : Why because we want to 
 maximise the area, I will try to find next potential height Which can be my Answer
+eg: l=1 r=7 minHeight is 1
+What if after 1 there is a large height like l=8 , r=7 minHeight = 7
 
 */
 

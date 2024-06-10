@@ -1,5 +1,6 @@
 class JumpGameII {
 
+    //https://leetcode.com/problems/jump-game-ii/
     //best Solution : Two Pointers
     public int jump(int[] nums) {
         int n = nums.length;
