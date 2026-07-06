@@ -1,0 +1,87 @@
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        Map<Integer, List<int[]>> map = new TreeMap<>();
+        Queue<coordinates> Q = new LinkedList<>();
+        Q.offer(new coordinates(0, 0, root));
+
+        while (!Q.isEmpty()) {
+            coordinates top = Q.poll();
+            int row = top.x;
+            int col = top.y;
+            TreeNode node = top.node;
+
+            map.putIfAbsent(col, new ArrayList<>());
+            map.get(col).add(new int[]{row, node.val});
+
+            if (node.left != null) Q.offer(new coordinates(row + 1, col - 1, node.left));
+            if (node.right != null) Q.offer(new coordinates(row + 1, col + 1, node.right));
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+        for (List<int[]> nodes : map.values()) {
+            nodes.sort((a, b) -> {
+                if (a[0] != b[0]) return a[0] - b[0]; // sort by row
+                return a[1] - b[1]; // then by value
+            });
+            List<Integer> colVals = new ArrayList<>();
+            for (int[] pair : nodes) colVals.add(pair[1]);
+            result.add(colVals);
+        }
+
+        return result;
+    }
+}
+
+class coordinates {
+    int x, y;
+    TreeNode node;
+    public coordinates(int x, int y, TreeNode node) {
+        this.x = x;
+        this.y = y;
+        this.node = node;
+    }
+}
+
+
+// DFS
+
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<int[]> nodes = new ArrayList<>();
+        
+        // Step 1: DFS to collect all (col, row, val)
+        dfs(root, 0, 0, nodes);
+
+        // Step 2: Sort by col, then row, then value
+        nodes.sort((a, b) -> {
+            if (a[0] != b[0]) return Integer.compare(a[0], b[0]);     // col
+            if (a[1] != b[1]) return Integer.compare(a[1], b[1]);     // row
+            return Integer.compare(a[2], b[2]);                       // value
+        });
+
+        List<List<Integer>> result = new ArrayList<>();
+        int prevCol = Integer.MIN_VALUE;
+
+        // Step 3: Group by column
+        for (int[] node : nodes) {
+            int col = node[0], val = node[2];
+            if (col != prevCol) {
+                result.add(new ArrayList<>());
+                prevCol = col;
+            }
+            result.get(result.size() - 1).add(val);
+        }
+
+        return result;
+    }
+
+    // DFS helper to collect column, row, and value
+    private void dfs(TreeNode node, int row, int col, List<int[]> nodes) {
+        if (node == null) return;
+        nodes.add(new int[]{col, row, node.val});
+        dfs(node.left, row + 1, col - 1, nodes);   // Left child
+        dfs(node.right, row + 1, col + 1, nodes);  // Right child
+    }
+}
