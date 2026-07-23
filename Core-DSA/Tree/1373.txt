@@ -1,0 +1,61 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+ class State
+ {
+    int minValue;
+    int maxValue;
+    boolean isBST;
+    int sumTree;
+
+    public State(int minValue, int maxValue, int sumTree, boolean isBST)
+    {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.sumTree = sumTree;
+        this.isBST = isBST;
+    }
+ }
+class Solution {
+    int maxSum = 0;
+
+    public int maxSumBST(TreeNode root) {
+        
+        largestBST(root);
+        return maxSum;
+    }
+
+    public State largestBST(TreeNode root)
+    {
+        if(root==null) return new State(Integer.MAX_VALUE, Integer.MIN_VALUE, 0, true);
+
+        State left = largestBST(root.left);
+        State right = largestBST(root.right);
+
+        State curr = new State(Integer.MAX_VALUE, Integer.MIN_VALUE,0,true);
+        curr.sumTree = left.sumTree + right.sumTree + root.val;
+        curr.minValue = Math.min(root.val, left.minValue);
+        curr.maxValue = Math.max(root.val, right.maxValue);
+        curr.isBST = left.isBST && right.isBST && (left.maxValue < root.val && root.val < right.minValue);
+
+        if(curr.isBST)
+        {
+            maxSum = Math.max(maxSum, curr.sumTree);
+        }
+        return curr;
+
+    }
+}
