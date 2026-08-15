@@ -15,7 +15,7 @@ The **Token Bucket** is one of the most widely used algorithms due to its simpli
 *   **Why they use it:** It allows clients to occasionally burst their traffic (e.g., sending multiple rapid requests) as long as there are accumulated tokens in the bucket [13]. It is extremely memory-efficient, storing only two variables (tokens and last updated timestamp) per user [23].
 
 ### 🎨 Visual Architecture Infographic
-![Token Bucket Algorithm](./token_bucket_diagram_v2.jpg)
+![Token Bucket Algorithm](./static/token_bucket_diagram_v2.jpg)
 
 ### ⚙️ Algorithmic Decision Tree (Mermaid)
 ```mermaid
@@ -46,7 +46,7 @@ The **Leaking Bucket** uses a first-in, first-out (FIFO) queue to guarantee a co
 *   **Why they use it:** Shopify uses this for their REST Admin API to ensure that clients do not spike or overwhelm backend databases. Requests are smoothed to a stable, continuous outflow rate [15].
 
 ### 🎨 Visual Architecture Infographic
-![Leaking Bucket Algorithm](./leaking_bucket_diagram_v2.jpg)
+![Leaking Bucket Algorithm](./static/leaking_bucket_diagram_v2.jpg)
 
 ### ⚙️ Algorithmic Decision Tree (Mermaid)
 ```mermaid
@@ -74,7 +74,7 @@ The **Fixed Window Counter** divides the timeline into static, non-overlapping w
 *   **Why they use it:** Google Docs uses a fixed-window quota system (e.g., 300 requests per user per 60 seconds) [3]. This works perfectly for resetting available quotas at human-friendly intervals (like at the start of a new minute or day) [18].
 
 ### 🎨 Visual Architecture Infographic
-![Fixed Window Counter](./fixed_window_diagram_v2.jpg)
+![Fixed Window Counter](./static/fixed_window_diagram_v2.jpg)
 
 ### ⚙️ Algorithmic Decision Tree (Mermaid)
 ```mermaid
@@ -106,7 +106,7 @@ The **Sliding Window Log** solves the window boundary spike problem of the Fixed
 *   **Why they use it:** ClassDojo uses rolling rate limits powered by Redis Sorted Sets [36] because they require absolute precision in rolling windows [20]. This prevents boundary-edge bursts and guarantees that a client can never exceed their rate limits within any rolling timeframe [18].
 
 ### 🎨 Visual Architecture Infographic
-![Sliding Window Log](./sliding_window_log_diagram_v2.jpg)
+![Sliding Window Log](./static/sliding_window_log_diagram_v2.jpg)
 
 ### ⚙️ Algorithmic Decision Tree (Mermaid)
 ```mermaid
@@ -134,7 +134,7 @@ The **Sliding Window Counter** is a memory-efficient hybrid of Fixed Window and 
 *   **Why they use it:** Cloudflare operates at a global scale, where tracking raw timestamp logs consumes far too much memory [20]. This hybrid algorithm requires checking only two counters per window, saving massive amounts of memory [22]. It provides a near-perfect approximation of the actual rate: Cloudflare's experiments across 400 million requests showed that only 0.003% of requests were wrongly allowed or throttled [23].
 
 ### 🎨 Visual Architecture Infographic
-![Sliding Window Counter](./sliding_window_counter_diagram_v2.jpg)
+![Sliding Window Counter](./static/sliding_window_counter_diagram_v2.jpg)
 
 ### ⚙️ Algorithmic Decision Tree (Mermaid)
 ```mermaid
