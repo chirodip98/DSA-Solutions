@@ -1,0 +1,33 @@
+class Solution {
+    public Node cloneGraph(Node node) {
+
+        if (node == null) return null;
+
+        HashMap<Node, Node> map = new HashMap<>();
+
+        return cloneGraphHelper(node, map);
+    }
+
+    private Node cloneGraphHelper(
+        Node node,
+        HashMap<Node, Node> map
+    ) {
+        // Already cloned
+        if (map.containsKey(node)) {
+            return map.get(node);
+        }
+
+        // Create clone and store BEFORE recursion
+        Node clone = new Node(node.val);
+        map.put(node, clone);
+
+        // Clone all neighbors
+        for (Node neighbor : node.neighbors) {
+            clone.neighbors.add(
+                cloneGraphHelper(neighbor, map)
+            );
+        }
+
+        return clone;
+    }
+}

@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int longestPath = 0;
+    public int longestZigZag(TreeNode root) {
+
+        longestZigZagHelper(root);
+        return longestPath;
+        
+    }
+
+    private int[] longestZigZagHelper(TreeNode root)
+    {
+        if(root==null) return new int[]{-1,-1};
+
+        int[] leftLongest = longestZigZagHelper(root.left);
+        int[] rightLongest = longestZigZagHelper(root.right);
+
+        int goLeft = 1 + leftLongest[1];
+        int goRight = 1 + rightLongest[0];
+        longestPath =Math.max(longestPath, Math.max(goLeft, goRight));
+        return new int[]{goLeft, goRight};
+
+
+    }
+}

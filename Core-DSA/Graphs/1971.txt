@@ -1,0 +1,50 @@
+class Solution {
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        
+        if(edges.length==0) return true;
+        Map<Integer, List<Integer>> adjacency = new HashMap<>();
+        for(int i=0; i< edges.length;i++)
+        {
+            adjacency.computeIfAbsent(edges[i][0], ls->new ArrayList<>()).add(edges[i][1]);
+            adjacency.computeIfAbsent(edges[i][1], ls->new ArrayList<>()).add(edges[i][0]);
+        }
+
+        int[] visited = new int[n];
+        return bfsHelper(source, destination,adjacency,visited);
+    }
+
+    private boolean dfsHelper(int source, int destination, Map<Integer, List<Integer>> adjacency, int[] visited)
+    {
+        if(source == destination) return true;
+        if(visited[source]==1) return false;
+        
+        visited[source]=1; //marking as visited
+
+        for(int n : adjacency.getOrDefault(source,new ArrayList<>()))
+        {
+            if(dfsHelper(n,destination, adjacency, visited)) return true;
+        }
+        return false;
+    }
+
+    private boolean bfsHelper(int source, int destination, Map<Integer, List<Integer>> adjacency, int[] visited)
+    {
+        Queue<Integer> bfs = new LinkedList<>();
+        bfs.offer(source);
+        visited[source]=1;
+
+        while(!bfs.isEmpty())
+        {
+            int node = bfs.poll();
+            for(int n : adjacency.getOrDefault(node, new ArrayList<>()))
+            {
+                if(n == destination) return true;
+                if(visited[n]==1) continue;
+                visited[n] = 1;
+                bfs.offer(n);
+            }
+        }
+
+        return false;
+    }
+}

@@ -1,0 +1,18 @@
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+        return helper(root, false);
+    }
+
+    private int helper(TreeNode node, boolean isLeft) {
+        if (node == null) return 0;
+
+        // If it's a leaf
+        if (node.left == null && node.right == null) {
+            return isLeft ? node.val : 0;
+        }
+
+        // Recurse left and right
+        return helper(node.left, true) + helper(node.right, false);
+    }
+}
